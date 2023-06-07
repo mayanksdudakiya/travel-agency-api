@@ -1,6 +1,16 @@
 ## Plan a project
 In this phase we will gather information regarding project and will make a list of features, questions to client, required productivity toold for project, database design, etc.
 
+**Table of Contents**
+
+**1)** Features
+
+**2)** Database Design
+
+**3)** Questions to Client
+
+**4)** How to start Laravel project?
+
 ## Features
 So after reading specifications multiple times, I have concluded below things
 
@@ -115,3 +125,21 @@ There are lots of questions that we can research and gather but its just for dem
 - Updated By
 
 ## How To Setup Laravel Project?
+
+**Coding Guidelines**
+Before jumping into the development dev should be aware of coding guidelines. Dev should read below links at least once and try to follow it as much as possible
+
+1) https://xqsit.github.io/laravel-coding-guidelines/
+2) https://spatie.be/guidelines/laravel-php
+
+**Productivity Tool**
+1) Setup Laravel Pint or Use Laravel inbuilt PHP-CS-Fixer
+2) Get familiar yourself with LaraStran
+3) X-Debug - In this case its not required but its very useful to debug your code very fast
+4) Laravel Debugbar - This will help to optimize db queries and other stuff
+5) Use all latest tech stack, its good to use latest PHP
+6) Use strict typing to avoid any bug
+7) Use inbuilt Laravel PHPUnit test
+8) Use Sanctum for the authorization
+9) Strictly follow Laravel naming conventions
+10) Use POSTMAN and its API doc facility
