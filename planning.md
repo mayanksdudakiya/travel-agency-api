@@ -18,6 +18,8 @@ So after reading specifications multiple times, I have concluded below things
 2) There is a 1 To M relationship between Travel & Tour so Tour will be dependent on Travel.
 3) Travel will have title, multiple images[can be seperate db table or json array field], number of days
 4) Tour will have pricing, start & end date, title, description, booking
+5) When Tour price return to frontend then we need to send it with price * 100
+6) While creating Tour price shoudl be price / 100
 
 #### Admin
 Admin can do following things
