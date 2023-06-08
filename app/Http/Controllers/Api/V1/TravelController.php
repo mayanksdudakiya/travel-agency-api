@@ -7,7 +7,12 @@ use Illuminate\Http\Request;
 
 class TravelController extends Controller
 {
-    public function __invoke()
+    public function index()
+    {
+
+    }
+
+    public function store()
     {
 
     }

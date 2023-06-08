@@ -19,4 +19,4 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get('travels', TravelController::class)->name('travels.index');
+Route::apiResource('travels', TravelController::class)->only(['index', 'store']);
