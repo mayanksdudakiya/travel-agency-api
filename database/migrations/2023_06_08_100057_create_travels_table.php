@@ -11,7 +11,7 @@ return new class () extends Migration {
             $table->id();
             $table->string('name');
             $table->string('slug')->unique();
-            $table->mediumText('description');
+            $table->text('description');
             $table->unsignedInteger('number_of_days');
             $table->boolean('is_public')->default(false);
             $table->auditFields();
