@@ -2,15 +2,11 @@
 
 namespace App\Providers;
 
-use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
 {
-    /**
-     * Register any application services.
-     */
     public function register(): void
     {
         //
@@ -19,8 +15,8 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         Blueprint::macro('auditFields', function () {
-            $this->bigInteger('created_by');
-            $this->bigInteger('updated_by')->nullable();
+            $this->foreignId('created_by')->constrained('users');
+            $this->foreignId('updated_by')->constrained('users')->nullable()->default(null);
             $this->timestamps();
         });
     }
