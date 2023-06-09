@@ -20,6 +20,8 @@ class TravelStoreRequest extends FormRequest
             'name'            => ['required', 'max:255'],
             'description'     => ['required', 'min:10', 'max:65535'],
             'number_of_days'  => ['required', 'numeric', 'gt:0'],
+            'is_public'       => ['boolean'],
+            'created_by'      => ['exists:App\Models\User,id'],
         ];
     }
 }

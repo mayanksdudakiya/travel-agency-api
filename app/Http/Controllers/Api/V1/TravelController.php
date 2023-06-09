@@ -3,8 +3,9 @@
 namespace App\Http\Controllers\Api\V1;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\TravelStoreRequest;
+use App\Http\Resources\TravelResource;
 use App\Models\Travel;
-use Illuminate\Http\Request;
 
 class TravelController extends Controller
 {
@@ -13,8 +14,9 @@ class TravelController extends Controller
 
     }
 
-    public function store(Request $request)
+    public function store(TravelStoreRequest $request): TravelResource
     {
-        Travel::create($request->all());
+        $newTravel = Travel::create($request->validated());
+        return new TravelResource($newTravel);
     }
 }
