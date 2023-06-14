@@ -2,9 +2,8 @@
 
 namespace Tests\Feature;
 
+use App\Models\Travel;
 use App\Models\User;
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 
 class TravelTest extends TestCase
@@ -30,5 +29,26 @@ class TravelTest extends TestCase
             ->assertSuccessful(201);
 
         $this->assertDatabaseHas('travels', $newTravel);
+    }
+
+    public function test_travels_can_be_listed_with_paginated_data(): void
+    {
+        Travel::factory(16)->create(['is_public' => true]);
+
+        $this->get(route('travels.index'))
+            ->assertOk()
+            ->assertJsonCount(15, 'data')
+            ->assertJsonPath('meta.last_page', 2);
+    }
+
+    public function test_only_public_travels_can_be_listed(): void
+    {
+        $publicTravel = Travel::factory()->create(['is_public' => true]);
+        Travel::factory()->create(['is_public' => false]);
+
+        $this->get(route('travels.index'))
+            ->assertOk()
+            ->assertJsonCount(1, 'data')
+            ->assertJsonPath('data.0.name', $publicTravel->name);
     }
 }
