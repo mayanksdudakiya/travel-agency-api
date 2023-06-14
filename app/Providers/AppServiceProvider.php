@@ -16,7 +16,7 @@ class AppServiceProvider extends ServiceProvider
     {
         Blueprint::macro('auditFields', function () {
             $this->foreignId('created_by')->constrained('users');
-            $this->foreignId('updated_by')->constrained('users')->nullable()->default(null);
+            $this->foreignId('updated_by')->nullable()->default(null)->constrained('users');
             $this->timestamps();
         });
     }

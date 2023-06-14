@@ -4,10 +4,22 @@ namespace Tests\Feature;
 
 use App\Models\Travel;
 use App\Models\User;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
 class TravelTest extends TestCase
 {
+    use RefreshDatabase;
+
+    public User $user;
+
+    public function setUp(): void
+    {
+        parent::setUp();
+
+        $this->user = User::factory()->create();
+    }
+
     public function test_travels_end_point(): void
     {
         $this->get(route('travels.index'))->assertOk();
@@ -15,14 +27,12 @@ class TravelTest extends TestCase
 
     public function test_travels_can_be_created(): void
     {
-        $user = User::factory()->create();
-
         $newTravel = [
             'name'           => 'Travel to India',
             'description'    => 'India is 5th largest economy in the world',
             'number_of_days' => 5,
             'is_public'      => true,
-            'created_by'     => $user->id
+            'created_by'     => $this->user->id
         ];
 
         $this->post(route('travels.store'), $newTravel)
@@ -43,8 +53,8 @@ class TravelTest extends TestCase
 
     public function test_only_public_travels_can_be_listed(): void
     {
-        $publicTravel = Travel::factory()->create(['is_public' => true]);
-        Travel::factory()->create(['is_public' => false]);
+        $publicTravel = Travel::factory()->create(['is_public' => true, 'created_by' => $this->user->id]);
+        Travel::factory()->create(['is_public' => false, 'created_by' => $this->user->id]);
 
         $this->get(route('travels.index'))
             ->assertOk()
