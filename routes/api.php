@@ -22,5 +22,5 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::apiResource('travels', TravelController::class)->only(['index', 'store']);
 
-Route::get('travels/{travel:slug}/tours', TourController::class)->name('tours.index');
-Route::post('travels/{travel}/tours', TourController::class)->name('tours.store');
+Route::get('travels/{travel:slug}/tours', [TourController::class, 'index'])->name('tours.index');
+Route::post('travels/{travel}/tours', [TourController::class, 'store'])->name('tours.store');
