@@ -20,4 +20,21 @@ class TourTest extends TestCase
         $this->get(route('tours.index', $travel->slug))
             ->assertOk();
     }
+
+    public function test_tour_can_be_created(): void
+    {
+        $travel = Travel::factory()->create();
+
+        $newTour = [
+            'name' => 'Tour Name',
+            'starting_date' => now()->toDateString(),
+            'ending_date' => now()->addDay()->toDateString(),
+            'price' => 77.78,
+        ];
+
+        $this->post(route('tours.store', $travel->id), $newTour)
+            ->assertSuccessful(201);
+
+        $this->assertDatabaseHas('tours', $newTour);
+    }
 }
