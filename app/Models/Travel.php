@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Casts\Attribute;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Travel extends Model
 {
@@ -23,6 +24,11 @@ class Travel extends Model
         'created_by',
         'updated_by',
     ];
+
+    public function tours(): HasMany
+    {
+        return $this->hasMany(Tour::class);
+    }
 
     public function numberOfNights(): Attribute
     {
